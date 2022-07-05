@@ -1,0 +1,14 @@
+version: "3.4"
+
+services:
+  api:
+    image: "short-url-api"
+    container_name: short-url-api
+
+  migrator:
+    image: "short-url-migrator"
+    container_name: short-url-migrator
+
+  postgres:
+    image: "postgres:12.5-alpine"
+    container_name: postgres

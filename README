@@ -1,0 +1,12 @@
+ShortUrl
+
+for starting:
+
+    make build
+
+    make run
+
+    swagger:
+        http://localhost/api/docs
+
+    make ci

@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Raman Salauyou
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: long_url_pk_pkey
+                  name: pk
+                  type: SERIAL
+              - column:
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: url_uckey
+                  name: url
+                  type: VARCHAR
+            tableName: long_url
+
+  - changeSet:
+      id: 2
+      author: Raman Salauyou
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: short_url_pk_pkey
+                  name: pk
+                  type: SERIAL
+              - column:
+                  constraints:
+                    nullable: false
+                  name: long_url_pk
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: url
+                  type: VARCHAR
+            tableName: short_url
+
+  - changeSet:
+      id: 3
+      author: Raman Salauyou
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: long_url_pk
+            baseTableName: short_url
+            constraintName: long_url_pk_fkey
+            onDelete: CASCADE
+            referencedColumnNames: pk
+            referencedTableName: long_url
+
+  - changeSet:
+      id: 4
+      author: Raman Salauyou
+      changes:
+        - addUniqueConstraint:
+            columnNames: long_url_pk, url
+            constraintName: long_url_pk_short_url_uckey
+            tableName: short_url
